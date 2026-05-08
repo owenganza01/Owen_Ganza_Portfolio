@@ -4,30 +4,28 @@ const skills = [
   {
     category: "Frontend Development",
     icon: <LayoutIcon className="w-6 h-6" />,
-    items: ["React", "TypeScript", "Tailwind CSS", "Next.js", "Framer Motion"],
+    items: ["React", "TypeScript", "Tailwind CSS", "Next.js"],
   },
   {
     category: "Backend Development",
     icon: <Database className="w-6 h-6" />,
-    items: ["Node.js", "PostgreSQL", "Supabase", "GraphQL", "Python"],
+    items: ["Node.js", "PostgreSQL", "MongoDB", "Python"],
   },
   {
     category: "Design",
     icon: <Palette className="w-6 h-6" />,
-    items: ["Figma", "UI/UX", "Prototyping", "Design Systems", "Wireframing"],
+    items: ["Figma", "UI/UX", "Wireframing"],
   },
   {
     category: "Tools & Others",
     icon: <Terminal className="w-6 h-6" />,
-    items: ["Git", "Docker", "CI/CD", "Jest", "Agile Methodologies"],
+    items: ["Git", "Agile Methodologies"],
   },
 ];
 
 const interests = [
-  { name: "Open Source", icon: <Globe className="w-5 h-5" /> },
-  { name: "Machine Learning", icon: <Cpu className="w-5 h-5" /> },
-  { name: "Clean Code", icon: <Code className="w-5 h-5" /> },
-  { name: "Architecture", icon: <Layers className="w-5 h-5" /> },
+  { name: "Game Development", icon: <Cpu className="w-5 h-5" /> },
+  { name: "3D Design", icon: <Layers className="w-5 h-5" /> },
 ];
 
 const Skills = () => {
@@ -35,10 +33,10 @@ const Skills = () => {
     <div className="flex-1 px-6 py-12 md:py-16 lg:py-20 max-w-6xl mx-auto w-full">
       <div className="mb-16 space-y-4">
         <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-neutral-900">
-          Skills & Interests
+          Technologies & Hobbies
         </h1>
         <p className="text-lg md:text-xl text-neutral-500 max-w-2xl">
-          The tools and technologies I use to bring ideas to life.
+          Thise are tools and technologies I have used to bring my projects to life.
         </p>
       </div>
 

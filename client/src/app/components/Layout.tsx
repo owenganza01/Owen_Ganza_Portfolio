@@ -9,7 +9,7 @@ const Layout = () => {
   const navLinks = [
     { name: "Home", path: "/", icon: Home },
     { name: "Projects", path: "/projects", icon: Briefcase },
-    { name: "Skills", path: "/skills", icon: User },
+    { name: "About", path: "/skills", icon: User },
     { name: "Contact", path: "/contact", icon: Mail },
   ];
 
