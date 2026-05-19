@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+const path = require('path');
 
 const app = express();
 app.use(cors());
@@ -37,6 +38,8 @@ const initTransporter = async () => {
   }
 };
 
+app.use(express.static(path.join(__dirname, '..', ' client', 'dist')));
+
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
   if (!name || !email || !message) {
@@ -66,6 +69,10 @@ app.post('/api/contact', async (req, res) => {
     console.error('Error sending email:', err);
     res.status(500).json({ error: 'Failed to send email' });
   }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '..', 'client', 'dist', 'index.html'));
 });
 
 const port = process.env.PORT || 3001;
