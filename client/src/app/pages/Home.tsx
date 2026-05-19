@@ -21,8 +21,8 @@ const Home = () => {
                   Full-Stack Developer
                 </p>
               </div>
-              <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
-                I build scalable web apps and turn data into actionable insights.
+              <p className="text-lg text-neutral-600 leading-relaxed max-w-md"> 
+                I create beautiful and functional websites. Specializing in modern web technologies and user-centered design.
               </p>
             </div>
           </div>
