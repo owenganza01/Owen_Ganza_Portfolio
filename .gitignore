@@ -1,9 +1,9 @@
-node_modules
+node_modules/
+
+# Build output
 dist/
 client/dist/
-server/.env
-.env
-dist/
-client/dist/
+
+# Environment files
 server/.env
 .env
