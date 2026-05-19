@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
-import heroImage from "@/assets/images/image04.jpg";
-import professionalImage from "@/assets/images/new image.jpeg";
+
 
 const Home = () => {
   return (
@@ -10,16 +9,7 @@ const Home = () => {
       <section className="py-16 md:py-20 lg:py-24 px-6 border-b border-neutral-200">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12 items-center">
-            {/* Professional Image */}
-            <div className="flex justify-center md:justify-start">
-              <div className="w-64 h-72 rounded-lg overflow-hidden bg-neutral-100 shadow-lg">
-                <img
-                  src={professionalImage}
-                  alt="Professional Portrait"
-                  className="w-full h-full object-contain object-center bg-neutral-100"
-                />
-              </div>
-            </div>
+            {/* Professional Image removed */}
             
             {/* Bio Information */}
             <div className="flex flex-col justify-center space-y-6">
@@ -28,7 +18,7 @@ const Home = () => {
                   Owen Ganza
                 </h2>
                 <p className="text-xl font-semibold text-neutral-600">
-                  Full-Stack Developer & Data Analyst
+                  Full-Stack Developer
                 </p>
               </div>
               <p className="text-lg text-neutral-600 leading-relaxed max-w-md">
