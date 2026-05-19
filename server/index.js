@@ -38,7 +38,7 @@ const initTransporter = async () => {
   }
 };
 
-app.use(express.static(path.join(__dirname, '..', ' client', 'dist')));
+app.use(express.static(path.join(__dirname, '..', 'client', 'dist')));
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
