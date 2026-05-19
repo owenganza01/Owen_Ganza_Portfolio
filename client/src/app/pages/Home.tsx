@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import heroImage from "@/assets/images/image04.jpg";
-import professionalImage from "@/assets/images/IMG_5576.JPG";
+import professionalImage from "@/assets/images/new image.jpeg";
 
 const Home = () => {
   return (
@@ -12,11 +12,11 @@ const Home = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             {/* Professional Image */}
             <div className="flex justify-center md:justify-start">
-              <div className="w-64 h-64 rounded-lg overflow-hidden bg-neutral-100 shadow-lg">
+              <div className="w-64 h-72 rounded-lg overflow-hidden bg-neutral-100 shadow-lg">
                 <img
                   src={professionalImage}
                   alt="Professional Portrait"
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-contain object-center bg-neutral-100"
                 />
               </div>
             </div>
@@ -53,7 +53,7 @@ const Home = () => {
               to="/projects"
               className="flex w-full sm:w-auto items-center justify-center px-8 py-4 bg-neutral-900 text-white font-medium hover:bg-neutral-800 transition-all active:scale-95"
             >
-              View Work
+              View Projects
               <ArrowRight className="ml-2 w-4 h-4" />
             </Link>
             <Link

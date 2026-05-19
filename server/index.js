@@ -7,15 +7,35 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const transporter = nodemailer.createTransport({
-  host: process.env.SMTP_HOST,
-  port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
-  secure: process.env.SMTP_SECURE === 'true',
-  auth: process.env.SMTP_USER ? {
-    user: process.env.SMTP_USER,
-    pass: process.env.SMTP_PASS,
-  } : undefined,
-});
+let transporter;
+
+// Initialize transporter, falling back to an Ethereal test account when SMTP is not configured.
+const initTransporter = async () => {
+  const usingPlaceholder = !process.env.SMTP_HOST || process.env.SMTP_HOST.includes('example.com');
+  if (usingPlaceholder || !process.env.SMTP_USER) {
+    console.warn('SMTP not configured or using placeholder host; creating a test account (Ethereal) for development.');
+    const testAccount = await nodemailer.createTestAccount();
+    transporter = nodemailer.createTransport({
+      host: testAccount.smtp.host,
+      port: testAccount.smtp.port,
+      secure: testAccount.smtp.secure,
+      auth: {
+        user: testAccount.user,
+        pass: testAccount.pass,
+      },
+    });
+  } else {
+    transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST,
+      port: process.env.SMTP_PORT ? Number(process.env.SMTP_PORT) : 587,
+      secure: process.env.SMTP_SECURE === 'true',
+      auth: {
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASS,
+      },
+    });
+  }
+};
 
 app.post('/api/contact', async (req, res) => {
   const { name, email, message } = req.body || {};
@@ -26,7 +46,7 @@ app.post('/api/contact', async (req, res) => {
   const toEmail = process.env.TO_EMAIL || process.env.SMTP_USER;
 
   try {
-    await transporter.sendMail({
+    const info = await transporter.sendMail({
       from: `${name} <${email}>`,
       to: toEmail,
       subject: `Owen_Ganza_Portfolio contact from ${name}`,
@@ -34,6 +54,13 @@ app.post('/api/contact', async (req, res) => {
       html: `<p>${message.replace(/\n/g, '<br/>')}</p><hr/><p>From: ${name} &lt;${email}&gt;</p>`,
     });
 
+    // If using Ethereal (test account) nodemailer provides a preview URL.
+    const previewUrl = nodemailer.getTestMessageUrl(info);
+    if (previewUrl) {
+      console.log('Preview email URL: %s', previewUrl);
+    }
+
+    console.log('Email sent: %s', info.messageId || '(no id)');
     res.status(200).json({ ok: true });
   } catch (err) {
     console.error('Error sending email:', err);
@@ -42,6 +69,16 @@ app.post('/api/contact', async (req, res) => {
 });
 
 const port = process.env.PORT || 3001;
-app.listen(port, () => {
-  console.log(`Server listening on http://localhost:${port}`);
-});
+
+// Initialize transporter before starting the server.
+(async () => {
+  try {
+    await initTransporter();
+    app.listen(port, () => {
+      console.log(`Server listening on http://localhost:${port}`);
+    });
+  } catch (err) {
+    console.error('Failed to initialize mail transporter:', err);
+    process.exit(1);
+  }
+})();

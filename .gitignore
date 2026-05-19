@@ -1,1 +1,9 @@
 node_modules
+dist/
+client/dist/
+server/.env
+.env
+dist/
+client/dist/
+server/.env
+.env
